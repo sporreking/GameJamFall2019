@@ -7,11 +7,8 @@ public class Door : MonoBehaviour
 
     public bool Locked;
 
-    private Rigidbody rb;
-
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
         if (Locked)
             Lock() ;
     }
@@ -20,11 +17,13 @@ public class Door : MonoBehaviour
     public void Unlock()
     {
         Locked = false;
-        rb.freezeRotation = false;
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        Debug.Log(GetComponent<Rigidbody>().GetInstanceID());
     }
 
     public void Lock()
     {
-        rb.freezeRotation = true;
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        Debug.Log(GetComponent<Rigidbody>().GetInstanceID());
     }
 }

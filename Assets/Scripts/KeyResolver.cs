@@ -7,6 +7,8 @@ public class KeyResolver : MonoBehaviour
 {
     public List<GameObject> Keys;
 
+    public bool DeleteKey;
+
     public UnityEvent OnKeyResolve;
 
     private void OnCollisionEnter(Collision collision)
@@ -14,6 +16,8 @@ public class KeyResolver : MonoBehaviour
         if (Keys.Contains(collision.gameObject))
         {
             OnKeyResolve.Invoke();
+            if (DeleteKey)
+                Destroy(collision.gameObject);
         }
     }
 }
