@@ -36,24 +36,40 @@ public class Player : MonoBehaviour
         Vector3 move = (forward * Input.GetAxis("Vertical") + right * Input.GetAxis("Horizontal"));
         move.Normalize();
         Controller.SimpleMove(move * Speed);
-        
+
+        // Interact
+        if (Input.GetButtonDown("Fire1"))
+            interactObject();
 
         // Push objects
-        if (Input.GetButtonDown("Fire1"))
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit, Reach, ~(1 << LayerMask.NameToLayer("Player"))))
-            {
-                Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
-
-                Debug.Log(hit.collider.gameObject.name);
-
-                if (rb)
-                    rb.AddForceAtPosition(Cam.transform.forward * PushPower, hit.point);
-            }
-        }
+        if (Input.GetButtonDown("Fire3"))
+            pushObject();
     }
     
+    private void interactObject()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit, Reach, ~(1 << LayerMask.NameToLayer("Player"))))
+        {
+            Interactable i = hit.collider.gameObject.GetComponent<Interactable>();
+
+            if (i)
+                i.OnInteract.Invoke();
+        }
+    }
+
+    private void pushObject()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit, Reach, ~(1 << LayerMask.NameToLayer("Player"))))
+        {
+            Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
+
+            if (rb)
+                rb.AddForceAtPosition(Cam.transform.forward * PushPower, hit.point);
+        }
+    }
+
     /*void OnControllerColliderHit(ControllerColliderHit hit)
     {
         Rigidbody body = hit.collider.attachedRigidbody;
