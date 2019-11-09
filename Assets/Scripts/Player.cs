@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
     public float Reach;
     public Transform Hand;
 
+    private bool Frozen = false;
+    private bool SkipFrame = false;
+
     private readonly float CastRadius = .25f;
 
     private CharacterController Controller;
@@ -30,29 +33,38 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Rotate
-        transform.Rotate(Vector3.up, Time.deltaTime * Input.GetAxis("LookX") * RotateSpeed, Space.World);
-        Cam.transform.Rotate(transform.right, Time.deltaTime * Input.GetAxis("LookY") * RotateSpeed, Space.World);
+        if (SkipFrame)
+        {
+            SkipFrame = false;
+            return;
+        }
 
-        // Move forward / backward
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 right = transform.TransformDirection(Vector3.right);
+        if (!Frozen)
+        {
+            // Rotate
+            transform.Rotate(Vector3.up, Time.deltaTime * Input.GetAxis("LookX") * RotateSpeed, Space.World);
+            Cam.transform.Rotate(transform.right, Time.deltaTime * Input.GetAxis("LookY") * RotateSpeed, Space.World);
 
-        Vector3 move = (forward * Input.GetAxis("Vertical") + right * Input.GetAxis("Horizontal"));
-        move.Normalize();
-        Controller.SimpleMove(move * Speed);
-        
-        // Interact objects
-        if (Input.GetButtonDown("Fire1"))
-            interactObject();
+            // Move forward / backward
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 right = transform.TransformDirection(Vector3.right);
 
-        // Pickup objects
-        if (Input.GetButtonDown("Fire2"))
-            pickupObject();
+            Vector3 move = (forward * Input.GetAxis("Vertical") + right * Input.GetAxis("Horizontal"));
+            move.Normalize();
+            Controller.SimpleMove(move * Speed);
 
-        // Push objects
-        if (Input.GetButtonDown("Fire3"))
-            pushObject();
+            // Interact objects
+            if (Input.GetButtonDown("Fire1"))
+                interactObject();
+
+            // Pickup objects
+            if (Input.GetButtonDown("Fire2"))
+                pickupObject();
+
+            // Push objects
+            if (Input.GetButtonDown("Fire3"))
+                pushObject();
+        }
 
         if (HeldItem)
         {
@@ -75,6 +87,15 @@ public class Player : MonoBehaviour
 
     private void pushObject()
     {
+        if (HeldItem)
+        {
+            Rigidbody r = HeldItem.GetComponent<Rigidbody>();
+            dropObject();
+            if (r)
+                r.AddForce(Cam.transform.forward * PushPower * 3);
+            return;
+        }
+
         RaycastHit hit;
         if (Physics.SphereCast(Cam.transform.position, CastRadius, Cam.transform.forward, out hit, Reach, ~(1 << LayerMask.NameToLayer("Player"))))
         {
@@ -102,6 +123,10 @@ public class Player : MonoBehaviour
             if (p)
             {
                 HeldItem = hit.collider.gameObject;
+                Rigidbody r = HeldItem.GetComponent<Rigidbody>();
+                if (r)
+                    r.freezeRotation = true;
+
                 p.OnPickedUp.Invoke();
             }
         }
@@ -110,7 +135,19 @@ public class Player : MonoBehaviour
     private void dropObject()
     {
         Pickupable p = HeldItem.GetComponent<Pickupable>();
+        Rigidbody r = HeldItem.GetComponent<Rigidbody>();
+        if (r)
+        {
+            r.velocity = Vector3.zero;
+            r.freezeRotation = false;
+        }
         HeldItem = null;
         p.OnDropped.Invoke();
+    }
+
+    public void Freeze(bool f)
+    {
+        Frozen = f;
+        SkipFrame = true;
     }
 }

@@ -16,8 +16,8 @@ TagManager:
   - Wall
   - Door
   - Player
-  - 
-  - 
+  - Pickupable
+  - Interactable
   - 
   - 
   - 
