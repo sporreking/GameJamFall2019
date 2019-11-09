@@ -11,9 +11,14 @@ public class Player : MonoBehaviour
     public float PushPower;
 
     public float Reach;
+    public Transform Hand;
+
+    private readonly float CastRadius = .25f;
 
     private CharacterController Controller;
     private Camera Cam;
+
+    private GameObject HeldItem = null;
 
     // Start is called before the first frame update
     void Start()
@@ -36,20 +41,30 @@ public class Player : MonoBehaviour
         Vector3 move = (forward * Input.GetAxis("Vertical") + right * Input.GetAxis("Horizontal"));
         move.Normalize();
         Controller.SimpleMove(move * Speed);
-
-        // Interact
+        
+        // Interact objects
         if (Input.GetButtonDown("Fire1"))
             interactObject();
+
+        // Pickup objects
+        if (Input.GetButtonDown("Fire2"))
+            pickupObject();
 
         // Push objects
         if (Input.GetButtonDown("Fire3"))
             pushObject();
+
+        if (HeldItem)
+        {
+            HeldItem.transform.position = Hand.position;
+        }
     }
     
     private void interactObject()
     {
         RaycastHit hit;
-        if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit, Reach, ~(1 << LayerMask.NameToLayer("Player"))))
+        if (Physics.SphereCast(Cam.transform.position, CastRadius, Cam.transform.forward, out hit, Reach,
+            (1 << LayerMask.NameToLayer("Door")) | (1 << LayerMask.NameToLayer("Interactable"))))
         {
             Interactable i = hit.collider.gameObject.GetComponent<Interactable>();
 
@@ -61,7 +76,7 @@ public class Player : MonoBehaviour
     private void pushObject()
     {
         RaycastHit hit;
-        if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit, Reach, ~(1 << LayerMask.NameToLayer("Player"))))
+        if (Physics.SphereCast(Cam.transform.position, CastRadius, Cam.transform.forward, out hit, Reach, ~(1 << LayerMask.NameToLayer("Player"))))
         {
             Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
 
@@ -70,30 +85,32 @@ public class Player : MonoBehaviour
         }
     }
 
-    /*void OnControllerColliderHit(ControllerColliderHit hit)
+    private void pickupObject()
     {
-        Rigidbody body = hit.collider.attachedRigidbody;
-
-        // no rigidbody
-        if (body == null || body.isKinematic)
+        if (HeldItem)
         {
+            dropObject();
             return;
         }
+            
 
-        // We dont want to push objects below us
-        if (hit.moveDirection.y < -0.3)
+        RaycastHit hit;
+        if (Physics.SphereCast(Cam.transform.position, CastRadius, Cam.transform.forward, out hit, Reach, (1 << LayerMask.NameToLayer("Pickupable"))))
         {
-            return;
+            Pickupable p = hit.collider.gameObject.GetComponent<Pickupable>();
+            
+            if (p)
+            {
+                HeldItem = hit.collider.gameObject;
+                p.OnPickedUp.Invoke();
+            }
         }
+    }
 
-        // Calculate push direction from move direction,
-        // we only push objects to the sides never up and down
-        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-
-        // If you know how fast your character is trying to move,
-        // then you can also multiply the push velocity by that.
-
-        // Apply the push
-        body.AddForce(pushDir * PushPower);
-    }*/
+    private void dropObject()
+    {
+        Pickupable p = HeldItem.GetComponent<Pickupable>();
+        HeldItem = null;
+        p.OnDropped.Invoke();
+    }
 }
