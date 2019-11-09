@@ -11,9 +11,14 @@ public class Player : MonoBehaviour
     public float PushPower;
 
     public float Reach;
+    public Transform Hand;
+
+    private readonly float CastRadius = .25f;
 
     private CharacterController Controller;
     private Camera Cam;
+
+    private GameObject HeldItem = null;
 
     // Start is called before the first frame update
     void Start()
@@ -36,22 +41,18 @@ public class Player : MonoBehaviour
         Vector3 move = (forward * Input.GetAxis("Vertical") + right * Input.GetAxis("Horizontal"));
         move.Normalize();
         Controller.SimpleMove(move * Speed);
-        
 
-        // Push objects
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire2"))
+            pickupObject();
+
+        if (Input.GetButtonDown("Fire3"))
+            dropObject();
+
+        if (HeldItem)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(Cam.transform.position, Cam.transform.forward, out hit, Reach, ~(1 << LayerMask.NameToLayer("Player"))))
-            {
-                Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
-
-                Debug.Log(hit.collider.gameObject.name);
-
-                if (rb)
-                    rb.AddForceAtPosition(Cam.transform.forward * PushPower, hit.point);
-            }
+            HeldItem.transform.position = Hand.position;
         }
+     
     }
     
     /*void OnControllerColliderHit(ControllerColliderHit hit)
@@ -80,4 +81,29 @@ public class Player : MonoBehaviour
         // Apply the push
         body.AddForce(pushDir * PushPower);
     }*/
+
+    private void pickupObject()
+    {
+        RaycastHit hit;
+        if (Physics.SphereCast(Cam.transform.position, CastRadius, Cam.transform.forward, out hit, Reach, (1 << LayerMask.NameToLayer("Pickupable"))))
+        {
+            Pickupable p = hit.collider.gameObject.GetComponent<Pickupable>();
+            
+            if (p && !HeldItem)
+            {
+                HeldItem = hit.collider.gameObject;
+                p.OnPickedUp.Invoke();
+            }
+        }
+    }
+
+    private void dropObject()
+    {
+        if (!HeldItem)
+            return;
+
+        Pickupable p = HeldItem.GetComponent<Pickupable>();
+        HeldItem = null;
+        p.OnDropped.Invoke();
+    }
 }
