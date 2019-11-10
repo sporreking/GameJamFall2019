@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
 
     private CharacterController Controller;
     private Camera Cam;
+    
 
     private float ChaosFactor = 0;
     private Material BlackoutMaterial;
@@ -28,11 +29,15 @@ public class Player : MonoBehaviour
     public Transform OGPosition;
 
     private AudioSource ChaosSound;
+    private AudioSource footstepSound;
 
     private float ChaosThreshold = .05f;
 
     private GameObject HeldItem = null;
 
+    private Footsteps footsteps;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +45,12 @@ public class Player : MonoBehaviour
         Controller = GetComponent<CharacterController>();
         Cam = GetComponentInChildren<Camera>();
         ThrashOffset = Vector3.zero;
-        ChaosSound = GetComponentInChildren<AudioSource>();
+        ChaosSound = Cam.GetComponentInChildren<AudioSource>();
+        footsteps = GetComponentInChildren<Footsteps>();
+        footstepSound = footsteps.GetComponentInChildren<AudioSource>();
+        
+
+
     }
 
     // Update is called once per frame
@@ -65,6 +75,12 @@ public class Player : MonoBehaviour
             Vector3 move = (forward * Input.GetAxis("Vertical") + right * Input.GetAxis("Horizontal"));
             move.Normalize();
             Controller.SimpleMove(move * Speed);
+
+            if (move.magnitude > 0 && !footstepSound.isPlaying)
+                footstepSound.Play();
+            else if (move.magnitude == 0 && footstepSound.isPlaying)
+                footstepSound.Pause();
+
 
             // Interact objects
             if (Input.GetButtonDown("Fire1"))
