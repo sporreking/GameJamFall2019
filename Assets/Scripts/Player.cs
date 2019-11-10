@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
     {
         RaycastHit hit;
         if (Physics.SphereCast(Cam.transform.position, CastRadius, Cam.transform.forward, out hit, Reach,
-            (1 << LayerMask.NameToLayer("Door")) | (1 << LayerMask.NameToLayer("Interactable"))))
+            (1 << LayerMask.NameToLayer("Interactable"))))
         {
             Interactable i = hit.collider.gameObject.GetComponent<Interactable>();
 
@@ -151,8 +151,7 @@ public class Player : MonoBehaviour
             dropObject();
             return;
         }
-            
-
+        
         RaycastHit hit;
         if (Physics.SphereCast(Cam.transform.position, CastRadius, Cam.transform.forward, out hit, Reach, (1 << LayerMask.NameToLayer("Pickupable"))))
         {

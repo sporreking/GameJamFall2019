@@ -12,11 +12,7 @@ GameObject:
   - component: {fileID: 212400615927798576}
   - component: {fileID: 95511550825230436}
   - component: {fileID: 114890819800577684}
-<<<<<<< HEAD
-  - component: {fileID: 4810381545027543353}
-=======
-  - component: {fileID: 7542993105574419115}
->>>>>>> 078cd83b1b51ce744453576c336d5d5f7c7efc60
+  - component: {fileID: 3580266271074484865}
   m_Layer: 0
   m_Name: red_flame_0 (3)
   m_TagString: Untagged
@@ -119,11 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraToLookAt: {fileID: 0}
-<<<<<<< HEAD
---- !u!108 &4810381545027543353
-=======
---- !u!108 &7542993105574419115
->>>>>>> 078cd83b1b51ce744453576c336d5d5f7c7efc60
+--- !u!108 &3580266271074484865
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,13 +125,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 9
   m_Type: 2
-<<<<<<< HEAD
-  m_Color: {r: 1, g: 0.81978834, b: 0.28773582, a: 1}
-  m_Intensity: 0.5
-=======
   m_Color: {r: 1, g: 0.83906674, b: 0.2216981, a: 1}
   m_Intensity: 1
->>>>>>> 078cd83b1b51ce744453576c336d5d5f7c7efc60
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

@@ -438,7 +438,7 @@ MonoBehaviour:
   Speed: 6
   RotateSpeed: 100
   PushPower: 100
-  Reach: 1.5
+  Reach: 2
   Hand: {fileID: 5941733910323193585}
   OGPosition: {fileID: 331499033839296420}
 --- !u!1 &7767747552537013034

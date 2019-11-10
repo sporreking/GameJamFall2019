@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 7505218729520637273}
   - component: {fileID: 2124218376615436151}
   - component: {fileID: 8397782266555433291}
+  - component: {fileID: 5577432751146960647}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -220,6 +221,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &5577432751146960647
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5244319539984921433}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &6247450561815037144
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +249,7 @@ GameObject:
   - component: {fileID: 2434516411765572790}
   - component: {fileID: 1080020140116026504}
   - component: {fileID: 5298400310554706916}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +341,7 @@ GameObject:
   - component: {fileID: 2179594100808462575}
   - component: {fileID: 6676267383728649687}
   - component: {fileID: 1001668081976629727}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +433,7 @@ GameObject:
   - component: {fileID: 8225150026347576179}
   - component: {fileID: 8794373105315946007}
   - component: {fileID: 4208825898503851795}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -619,11 +636,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2278672510769100026}
     m_Modifications:
-    - target: {fileID: 2334511090173652838, guid: 1e973d3e4df137347b52025fefd96ff8,
-        type: 3}
-      propertyPath: m_Name
-      value: MailDoor (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 2334511090173652861, guid: 1e973d3e4df137347b52025fefd96ff8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -694,6 +706,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.0100000035
       objectReference: {fileID: 0}
+    - target: {fileID: 2334511090173652838, guid: 1e973d3e4df137347b52025fefd96ff8,
+        type: 3}
+      propertyPath: m_Name
+      value: MailDoor (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 2334511090173652833, guid: 1e973d3e4df137347b52025fefd96ff8,
         type: 3}
       propertyPath: Keys.Array.size
@@ -703,16 +720,17 @@ PrefabInstance:
         type: 3}
       propertyPath: Keys.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2199995163814954610, guid: e72b4dd0324d97f4f9627fa1166923cb,
+        type: 3}
     - target: {fileID: 2334511090173652833, guid: 1e973d3e4df137347b52025fefd96ff8,
         type: 3}
       propertyPath: DeleteKey
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2334511090173652860, guid: 1e973d3e4df137347b52025fefd96ff8,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -0.45999363
+      value: -0.45999125
       objectReference: {fileID: 0}
     - target: {fileID: 2334511090173652860, guid: 1e973d3e4df137347b52025fefd96ff8,
         type: 3}
@@ -722,13 +740,13 @@ PrefabInstance:
     - target: {fileID: 2334511090173652860, guid: 1e973d3e4df137347b52025fefd96ff8,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.5064997
+      value: -0.5064998
       objectReference: {fileID: 0}
     - target: {fileID: 2334511090173652860, guid: 1e973d3e4df137347b52025fefd96ff8,
         type: 3}
       propertyPath: m_ConnectedBody
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5577432751146960647}
     - target: {fileID: 8704373131565357491, guid: 1e973d3e4df137347b52025fefd96ff8,
         type: 3}
       propertyPath: Locked

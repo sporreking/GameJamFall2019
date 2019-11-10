@@ -17,8 +17,9 @@ public class Door : MonoBehaviour
     public void Unlock()
     {
         Locked = false;
-        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-        Debug.Log(GetComponent<Rigidbody>().GetInstanceID());
+        Rigidbody r = GetComponent<Rigidbody>();
+        r.constraints = RigidbodyConstraints.None;
+        r.transform.Rotate(0, 90, 0);
     }
 
     public void Lock()
