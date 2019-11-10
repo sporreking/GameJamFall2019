@@ -21,7 +21,7 @@ public class EyeGenerator : MonoBehaviour
             angleVertical = Random.value * Mathf.PI;
             angleHorizontal = Random.value * 2 * Mathf.PI;
             float yPos = Mathf.Sin(angleVertical);
-            spawnPoint = new Vector3(Mathf.Cos(angleVertical) * Mathf.Cos(angleHorizontal),
+            spawnPoint = transform.position + new Vector3(Mathf.Cos(angleVertical) * Mathf.Cos(angleHorizontal),
                 yPos/(1 + Mathf.Pow(yPos,downScalerY)),
                 Mathf.Cos(angleVertical) * Mathf.Sin(angleHorizontal))*radius;
             
