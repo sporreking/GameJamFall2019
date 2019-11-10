@@ -14,18 +14,14 @@ public class Patroller : AIBehaviour
     public UnityEvent PlayerSpotted;
     public UnityEvent PlayerLost;
 
-    public GameObject Path;
-
     private NavMeshAgent Agent;
     private Player Player;
     private Camera Camera;
-    private int DestPos = 0;
+    private int DestPos = 1;
     private Transform[] Points;
     private bool IsPlayerSpotted = false;
 
-    private readonly float Speed = 5f;
-
-    private readonly float DestinationSpacing = .5f;
+    private readonly float DestinationSpacing = 1f;
 
     public override void DrawDebug(GameObject gameObject)
     {
@@ -50,6 +46,7 @@ public class Patroller : AIBehaviour
 
         Player = GameObject.FindObjectOfType<Player>();
         Camera = Player.gameObject.GetComponentInChildren<Camera>();
+        GameObject Path = gameObject.GetComponentInParent<Path>().Route;
         Points = Path.GetComponentsInChildren<Transform>();
 
         GoToNextPoint();
@@ -57,12 +54,13 @@ public class Patroller : AIBehaviour
 
     public void OnPlayerSpotted(GameObject gameObject)
     {
-        Debug.Log("Spotted");
+        IsPlayerSpotted = true;
         FollowPlayer();
     }
 
     public void OnPlayerLost(GameObject gameObject)
     {
+        IsPlayerSpotted = false;
         GoToNextPoint();
     }
 
@@ -76,6 +74,9 @@ public class Patroller : AIBehaviour
     {
         if (Points.Length == 0)
             return;
+
+        if (DestPos == 0)
+            DestPos++;
 
         Agent.SetDestination(Points[DestPos].position);
         DestPos = (DestPos + 1) % Points.Length;
