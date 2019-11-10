@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class Eye : MonoBehaviour
 {
-
-
     public AIBehaviour CurrentBehaviour;
-
- 
 
     void Start()
     {
-        
         SetBehaviour(CurrentBehaviour);
     }
 
