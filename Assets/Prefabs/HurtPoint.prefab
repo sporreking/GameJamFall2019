@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HurtRadius: 10
+  Invert: 0
+  InnerRadius: 0
