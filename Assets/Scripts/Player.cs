@@ -135,7 +135,7 @@ public class Player : MonoBehaviour
         }
 
         RaycastHit hit;
-        if (Physics.SphereCast(Cam.transform.position, CastRadius, Cam.transform.forward, out hit, Reach, ~(1 << LayerMask.NameToLayer("Player"))))
+        if (Physics.SphereCast(Cam.transform.position, CastRadius, Cam.transform.forward, out hit, Reach, (1 << LayerMask.NameToLayer("Door"))))
         {
             Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();
 
