@@ -11217,7 +11217,7 @@ Transform:
   m_GameObject: {fileID: 7367661032877301877}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.597722, y: -6.8356447, z: -1.7638898}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.7515357, y: 1.7515357, z: 1.7515357}
   m_Children:
   - {fileID: 5592003705738340886}
   - {fileID: 3307270025553971716}
@@ -15099,11 +15099,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5239081959430248191, guid: f14af05d277e55042878b26f8398fd2b,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 997399307458229466, guid: f14af05d277e55042878b26f8398fd2b,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -16004,16 +15999,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4697874758875445035}
     m_Modifications:
-    - target: {fileID: 3099926238412009428, guid: 91b790195d4dccd4f8d7643ebd776cf7,
-        type: 3}
-      propertyPath: m_Name
-      value: Sign
-      objectReference: {fileID: 0}
-    - target: {fileID: 3099926238412009428, guid: 91b790195d4dccd4f8d7643ebd776cf7,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 5026060780743145052, guid: 91b790195d4dccd4f8d7643ebd776cf7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16079,6 +16064,26 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3099926238412009428, guid: 91b790195d4dccd4f8d7643ebd776cf7,
+        type: 3}
+      propertyPath: m_Name
+      value: Sign
+      objectReference: {fileID: 0}
+    - target: {fileID: 3099926238412009428, guid: 91b790195d4dccd4f8d7643ebd776cf7,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321122688198184978, guid: 91b790195d4dccd4f8d7643ebd776cf7,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1027807190244244243, guid: 91b790195d4dccd4f8d7643ebd776cf7,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 8072961527553115131, guid: 91b790195d4dccd4f8d7643ebd776cf7,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -16090,16 +16095,6 @@ PrefabInstance:
       value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 2072656155117446478, guid: 91b790195d4dccd4f8d7643ebd776cf7,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1027807190244244243, guid: 91b790195d4dccd4f8d7643ebd776cf7,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 4321122688198184978, guid: 91b790195d4dccd4f8d7643ebd776cf7,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
@@ -18444,11 +18439,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwingDoor
       objectReference: {fileID: 0}
-    - target: {fileID: 153323905196416898, guid: 1b4f006f721eede4ca5f6cd964202eb0,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 153323905196416921, guid: 1b4f006f721eede4ca5f6cd964202eb0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18554,16 +18544,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4697874758875445035}
     m_Modifications:
-    - target: {fileID: 3099926238412009428, guid: 91b790195d4dccd4f8d7643ebd776cf7,
-        type: 3}
-      propertyPath: m_Name
-      value: Sign (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3099926238412009428, guid: 91b790195d4dccd4f8d7643ebd776cf7,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 5026060780743145052, guid: 91b790195d4dccd4f8d7643ebd776cf7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18629,6 +18609,26 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3099926238412009428, guid: 91b790195d4dccd4f8d7643ebd776cf7,
+        type: 3}
+      propertyPath: m_Name
+      value: Sign (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3099926238412009428, guid: 91b790195d4dccd4f8d7643ebd776cf7,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321122688198184978, guid: 91b790195d4dccd4f8d7643ebd776cf7,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1027807190244244243, guid: 91b790195d4dccd4f8d7643ebd776cf7,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 8072961527553115131, guid: 91b790195d4dccd4f8d7643ebd776cf7,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -18640,16 +18640,6 @@ PrefabInstance:
       value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 2072656155117446478, guid: 91b790195d4dccd4f8d7643ebd776cf7,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1027807190244244243, guid: 91b790195d4dccd4f8d7643ebd776cf7,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 4321122688198184978, guid: 91b790195d4dccd4f8d7643ebd776cf7,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
