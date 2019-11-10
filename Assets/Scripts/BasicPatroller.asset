@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb14f3fb2b45ff04c94e673d5f53e73e, type: 3}
-  m_Name: Patroller
+  m_Name: BasicPatroller
   m_EditorClassIdentifier: 
   SpottingDistance: 0
   NotSpottingDistance: 0
-  OnPlayerSpotted:
+  PlayerSpotted:
     m_PersistentCalls:
       m_Calls: []
-  OnPlayerLost:
+  PlayerLost:
     m_PersistentCalls:
       m_Calls: []
-  Points: []
+  Path: {fileID: 0}
