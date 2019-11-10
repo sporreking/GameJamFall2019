@@ -199,3 +199,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentBehaviour: {fileID: 11400000, guid: ea655c07f2e4e3145a0ded4d98e6424e, type: 2}
+  HurtRadius: 10

@@ -21,13 +21,26 @@ public class Player : MonoBehaviour
     private CharacterController Controller;
     private Camera Cam;
 
+    private float ChaosFactor = 0;
+    private Material BlackoutMaterial;
+
+    private Vector3 ThrashOffset;
+    public Transform OGPosition;
+
+    private AudioSource ChaosSound;
+
+    private float ChaosThreshold = .05f;
+
     private GameObject HeldItem = null;
 
     // Start is called before the first frame update
     void Start()
     {
+        BlackoutMaterial = GameObject.FindGameObjectWithTag("Blackout").GetComponent<MeshRenderer>().material;
         Controller = GetComponent<CharacterController>();
         Cam = GetComponentInChildren<Camera>();
+        ThrashOffset = Vector3.zero;
+        ChaosSound = GetComponentInChildren<AudioSource>();
     }
 
     // Update is called once per frame
@@ -70,6 +83,31 @@ public class Player : MonoBehaviour
         {
             HeldItem.transform.position = Hand.position;
         }
+
+        // Chaos
+        causeChaos();
+    }
+
+    private void causeChaos()
+    {
+        // Blackout
+        Color color = BlackoutMaterial.color;
+        color.a = ChaosFactor * 1.7f;
+        BlackoutMaterial.color = color;
+
+        // Camera
+        ThrashOffset = Random.insideUnitSphere * ChaosFactor;
+        Cam.transform.position = OGPosition.position + ThrashOffset;
+
+        // Sound
+        if (ChaosFactor > 0 && !ChaosSound.isPlaying)
+            ChaosSound.Play();
+
+        ChaosSound.volume = ChaosFactor * .7f;
+
+        // Reset
+        if (ChaosFactor <= ChaosThreshold)
+            ChaosThreshold = 0;
     }
     
     private void interactObject()
@@ -149,5 +187,10 @@ public class Player : MonoBehaviour
     {
         Frozen = f;
         SkipFrame = true;
+    }
+
+    public void SetChaosFactor(float f)
+    {
+        ChaosFactor = f;
     }
 }
