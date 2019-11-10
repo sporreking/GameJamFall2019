@@ -8,6 +8,10 @@ public class HurtPoint : MonoBehaviour
 
     private GameObject p;
 
+    public bool Invert;
+    public float InnerRadius;
+    private float CurrentChaosFactor = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +25,13 @@ public class HurtPoint : MonoBehaviour
 
         if (d.magnitude < HurtRadius)
         {
-            p.GetComponent<Player>().SetChaosFactor(1.0f - d.magnitude / HurtRadius);
+            CurrentChaosFactor = (Invert ? Mathf.Max(d.magnitude - InnerRadius, 0) / (HurtRadius - InnerRadius)
+                : 1.0f - d.magnitude / HurtRadius);
+            p.GetComponent<Player>().SetChaosFactor();
         }
+    }
+    public float GetChaosFactor()
+    {
+        return CurrentChaosFactor;
     }
 }

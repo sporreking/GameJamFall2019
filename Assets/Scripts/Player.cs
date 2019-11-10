@@ -189,8 +189,18 @@ public class Player : MonoBehaviour
         SkipFrame = true;
     }
 
-    public void SetChaosFactor(float f)
+    public void SetChaosFactor()
     {
-        ChaosFactor = f;
+
+        // Accumulate all chaos factors from hurt points
+        HurtPoint[] chaosList = GameObject.FindObjectsOfType<HurtPoint>();
+        float accChaosFactor=0;
+        foreach (HurtPoint hurtPoint in chaosList)
+        {
+            accChaosFactor += hurtPoint.GetChaosFactor();
+
+        }
+        ChaosFactor = accChaosFactor;
+        //ChaosFactor = f;
     }
 }
