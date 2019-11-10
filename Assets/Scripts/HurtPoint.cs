@@ -34,4 +34,9 @@ public class HurtPoint : MonoBehaviour
     {
         return CurrentChaosFactor;
     }
+
+    public void SetChaosFactor(float f)
+    {
+        CurrentChaosFactor = 0;
+    }
 }

@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
 
     private GameObject HeldItem = null;
 
+    private Vector3 SpawnPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +43,8 @@ public class Player : MonoBehaviour
         Cam = GetComponentInChildren<Camera>();
         ThrashOffset = Vector3.zero;
         ChaosSound = GetComponentInChildren<AudioSource>();
+
+        SpawnPoint = transform.position;
     }
 
     // Update is called once per frame
@@ -90,6 +94,22 @@ public class Player : MonoBehaviour
 
     private void causeChaos()
     {
+
+        Debug.Log("ChaosFactor");
+        // Dead?
+        if (ChaosFactor >= .9f)
+        {
+            transform.position = SpawnPoint;
+            ChaosFactor = 0;
+            SkipFrame = true;
+
+            HurtPoint[] chaosList = GameObject.FindObjectsOfType<HurtPoint>();
+            foreach (HurtPoint hurtPoint in chaosList)
+            {
+                hurtPoint.SetChaosFactor(0);
+            }
+        }
+
         // Blackout
         Color color = BlackoutMaterial.color;
         color.a = ChaosFactor * 1.7f;
@@ -190,7 +210,11 @@ public class Player : MonoBehaviour
 
     public void SetChaosFactor()
     {
-
+        if (HeldItem && HeldItem.tag == "Cross")
+        {
+            ChaosFactor = 0;
+            return;
+        }
         // Accumulate all chaos factors from hurt points
         HurtPoint[] chaosList = GameObject.FindObjectsOfType<HurtPoint>();
         float accChaosFactor=0;
@@ -201,5 +225,12 @@ public class Player : MonoBehaviour
         }
         ChaosFactor = accChaosFactor;
         //ChaosFactor = f;
+
+        Debug.Log(ChaosFactor);
+    }
+
+    public void win()
+    {
+        Cam.transform.position = new Vector3(5000, 0, 5000);
     }
 }

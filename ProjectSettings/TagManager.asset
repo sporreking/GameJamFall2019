@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Blackout
   - HurtPoint
+  - Cross
   layers:
   - Default
   - TransparentFX
