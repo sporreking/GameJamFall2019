@@ -8,9 +8,13 @@ public class PlayOnCollision : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && !audioSource.isPlaying)
-        {
+        if (other.CompareTag("Player") && !audioSource.isPlaying)
             audioSource.Play();
-        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && audioSource.isPlaying)
+            audioSource.Stop();
     }
 }
